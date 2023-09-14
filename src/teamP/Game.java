@@ -21,7 +21,7 @@ public class Game {
 			
 			switch(menu){
 			case 1 :
-				th();
+//				th();
 				break;
 			case 2 :
 				
@@ -44,10 +44,10 @@ public class Game {
 		System.out.println("프로그램 종료");
 	}
 	
+	
 	public void th() {
 		th.start();
 	}
-	
 	
 }
 
@@ -95,4 +95,4 @@ for(i는 0부터 받은 리스트의 사이즈까지){
 	.
 }
  * */
- */
+// */
