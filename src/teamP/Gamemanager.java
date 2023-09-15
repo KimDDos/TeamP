@@ -4,9 +4,12 @@ import java.util.Scanner;
 
 public class Gamemanager {
 	private TexasHoldem th = new TexasHoldem();
+	private President pres = new President();
 
 	public void mainConsole(Scanner scan) {
 		int menu = 0;
+		
+		pres.presidentStart(scan);
 		
 		do {
 			System.out.println("----GAME----");
