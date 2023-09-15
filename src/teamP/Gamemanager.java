@@ -2,7 +2,7 @@ package teamP;
 
 import java.util.Scanner;
 
-public class Game {
+public class Gamemanager {
 	private TexasHoldem th = new TexasHoldem();
 
 	public void mainConsole(Scanner scan) {
