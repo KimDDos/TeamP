@@ -18,7 +18,7 @@ public class Main {
 		
 		
 		
-//		g.mainConsole(scan);
+		g.mainConsole(scan);
 		
 		
 		

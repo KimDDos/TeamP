@@ -459,8 +459,15 @@ public class President {  // 대부호 게임
 		for(int i=0; i<player.getCl().size(); i++) {
 			cp.deckAdd(player.getCl().get(i).getShape(), player.getCl().get(i).getNum());
 		}
+		for(int i=0; i<player.getCl().size(); i++) {
+			if(i>=10) {
+				System.out.print("    ["+(i+1)+"]     ");
+			} else {
+				System.out.print("     ["+(i+1)+"]      ");
+			}
+		}
+		System.out.println();
 		cp.cardPrint(cp.printDeck());
-		
 	}
 	
 	public void orderList(PlayerBanker name) {
@@ -473,10 +480,10 @@ public class President {  // 대부호 게임
 			}
 	}
 	
-	public void pedigreeChart() { // 족보
-//		if() {
-//			
-//		}
+	public void pedigreeChart(int num) { // 족보
+		if(num >= 3) {
+			
+		}
 		// (강함) 2-A-K-Q-J-10-9-8-7-6-5-4-3 (약함)
 	}
 	

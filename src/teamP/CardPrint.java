@@ -476,6 +476,8 @@ public class CardPrint {
 		System.out.println(str);
 	}
 	
+	
+	
 	public void deckAdd(char shape, int number){
 		deckPrint.add(cardSelect(shape, number));
 	}
@@ -493,6 +495,11 @@ public class CardPrint {
 		}
 		return printDeck;
 	}
+	
+//	public String cardbackPrint() {
+//		// 54번 출력
+//		cardNum = "54";
+//	}
 	
 	public String cardSelect(char shape, int number) {
 		switch (shape) {
