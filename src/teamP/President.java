@@ -487,46 +487,97 @@ public class President {  private static final Scanner Scanner = null;
 			}
 	}
 	
+	public void comOrderList(PlayerBanker com) {
+		if(com.getOrderNumber()==dropOrPass) {
+			comChoice(com);
+			dropOrPass++;
+		}
+		if(this.members+1==dropOrPass) {
+			this.dropOrPass=1;
+		}
+	}
+	
+	public void orders() {
+		switch (this.members){
+		case 2: 
+			orderList(player, Scanner);
+			comOrderList(comm);
+			break;
+		case 3: 
+			orderList(player, Scanner);
+			comOrderList(comm);
+			comOrderList(comm2);
+			break;
+		case 4: 
+			orderList(player, Scanner);
+			comOrderList(comm);
+			comOrderList(comm2);
+			comOrderList(comm3);
+			break;
+		case 5: 
+			orderList(player, Scanner);
+			comOrderList(comm);
+			comOrderList(comm2);
+			comOrderList(comm3);
+			comOrderList(comm4);
+			break;
+		case 6: 
+			orderList(player, Scanner);
+			comOrderList(comm);
+			comOrderList(comm2);
+			comOrderList(comm3);
+			comOrderList(comm4);
+			comOrderList(comm5);
+			break;
+		case 7: 
+			orderList(player, Scanner);
+			comOrderList(comm);
+			comOrderList(comm2);
+			comOrderList(comm3);
+			comOrderList(comm4);
+			comOrderList(comm5);
+			comOrderList(comm6);
+			break;
+		}
+	}
+	
 	public void cardchoice(Scanner sc) {
 		int menu = -1;
+		// 앞에 컴퓨터가 낸 카드를 볼 수 있는 메서드 추가 필요
 		do {
 			System.out.println("카드를 내려면 1, Pass 하려면 0");
 			menu = sc.nextInt();
+			if(menu==0) System.out.println("Pass~!!");
 			if(menu!=0) {
 				System.out.println("내고싶은 카드번호를 입력해주세요.");
 				menu = sc.nextInt();
 				while(true) {
 					if(pedigreeChart(player.getCl().get(menu-1).getNum())) {
 						trash.getCd().add(player.getCl().get(menu-1));
-						break;
 					} else {
 						System.out.println("더 강한 카드를 내주세요!");
 						System.out.println("(강함) 2-A-K-Q-J-10-9-8-7-6-5-4-3 (약함)");
 						menu = sc.nextInt();
 					}
+					System.out.println("카드를 더 내려면 1, 턴을 종료하려면 0을 입력해주세요.");
+					menu = sc.nextInt();
+					if(menu==0) break;
 				}
 			}
-			System.out.println("카드를 더 내려면 1, 턴을 종료하려면 0을 입력해주세요.");
-			menu = sc.nextInt();
 		} while(menu!=0);
-		System.out.println("턴 종료~!");
-		
-		
-		
-		try {
-//			System.out.println("낼 카드를 골라주세요.");
-//			menu = sc.nextInt();
-			
-			if(pedigreeChart(menu)) {
-				
+		System.out.println("Player 턴 종료~!");
+	}
+	
+	public void comChoice(PlayerBanker com) {
+		while(true) {
+			int ran = (int)(Math.random()*com.getCl().size()); 
+			if(pedigreeChart(com.getCl().get(ran).getNum())) {
+				trash.getCd().add(com.getCl().get(ran));
+				if(pedigreeChart(com.getCl().get(ran).getNum())) {
+					trash.getCd().add(com.getCl().get(ran));
+				}
+				break;
 			}
-			
-			trash.getCd().add(player.getCl().get(menu));
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("숫자만 입력해주세요.");
 		}
 	}
 	
@@ -563,6 +614,8 @@ public class President {  private static final Scanner Scanner = null;
 	//  ->  (강함) 3-4-5-6-7-8-9-10-J-Q-K-A-2 (약함)
 //		}
 //	}
+	
+	// 2번째 게임부터 룰 적용
 	
 	public void rank(int rank) {
 		String ranked = null;
