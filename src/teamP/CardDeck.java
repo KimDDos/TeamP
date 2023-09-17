@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class CardDeck {
 
 	private ArrayList<Card> cd = new ArrayList<Card>();
-	private int cnt = 0;  //pack 배열의 index 체크용
 	
 	//생성자 : 52장의 카드를 모두 생성
 	public CardDeck() {
@@ -25,6 +24,7 @@ public class CardDeck {
 				cd.add(new Card(shape, j));
 			}
 		}
+		shuffle();
 	}
 	
 	

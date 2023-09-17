@@ -10,6 +10,11 @@ public class Gamemanager {
 		int menu = 0;
 		
 		pres.presidentStart(scan);
+		System.out.println(pres.getPlayer().getCl());
+		System.out.println(pres.getComm().getCl());
+//		System.out.println(pres.getComm2().getCl());
+//		System.out.println(pres.getComm3().getCl());
+//		System.out.println(pres.getComm4().getCl());
 		
 		do {
 			System.out.println("----GAME----");

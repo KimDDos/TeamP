@@ -20,6 +20,7 @@ public class President {  // 대부호 게임
 	public void presidentStart(Scanner scan) {
 		gameSetting(scan);
 		presidentRulePrint(scan);
+		givingHandouts(this.members);
 	}
 	
 	public void gameSetting(Scanner scan) {
@@ -81,8 +82,96 @@ public class President {  // 대부호 게임
 		} while(menu!=1);
 	}
 	
-	public void presidentGame(Scanner scan) {
-		
+	public void gameMain(Scanner scan) {
+	}
+	
+	public void givingHandouts(int members) {
+		switch (members) {
+		case 2: 
+			for(int i=0; i<cd.getCd().size(); i++) {
+				if(i%2 == 1) {
+					player.addCard(cd.pick());
+				} else {
+					comm.addCard(cd.pick());
+				}
+			}
+			break;
+		case 3: 
+			for(int i=0; i<cd.getCd().size(); i++) {
+				if(i%3==1) {
+					player.addCard(cd.pick());
+				} else if(i%3==2) {
+					comm.addCard(cd.pick());
+				} else {
+					comm2.addCard(cd.pick());
+				}
+			}
+			break;
+		case 4: 
+			for(int i=0; i<cd.getCd().size(); i++) {
+				if(i%4==1) {
+					player.addCard(cd.pick());
+				} else if(i%4==2) {
+					comm.addCard(cd.pick());
+				} else if(i%4==3) {
+					comm2.addCard(cd.pick());
+				} else {
+					comm3.addCard(cd.pick());
+				}
+			}
+			break;
+		case 5: 
+			for(int i=0; i<cd.getCd().size(); i++) {
+				if(i%5==1) {
+					player.addCard(cd.pick());
+				} else if(i%5==2) {
+					comm.addCard(cd.pick());
+				} else if(i%5==3) {
+					comm2.addCard(cd.pick());
+				} else if(i%5==4) {
+					comm3.addCard(cd.pick());
+				} else {
+					comm4.addCard(cd.pick());
+				}
+			}
+			break;
+		case 6: 
+			for(int i=0; i<cd.getCd().size(); i++) {
+				if(i%6==1) {
+					player.addCard(cd.pick());
+				} else if(i%6==2) {
+					comm.addCard(cd.pick());
+				} else if(i%6==3) {
+					comm2.addCard(cd.pick());
+				} else if(i%6==4) {
+					comm3.addCard(cd.pick());
+				} else if(i%6==5) {
+					comm4.addCard(cd.pick());
+				} else {
+					comm5.addCard(cd.pick());
+				}
+			}
+			break;
+		case 7: 
+			for(int i=0; i<cd.getCd().size(); i++) {
+				if(i%7==1) {
+					player.addCard(cd.pick());
+				} else if(i%7==2) {
+					comm.addCard(cd.pick());
+				} else if(i%7==3) {
+					comm2.addCard(cd.pick());
+				} else if(i%7==4) {
+					comm3.addCard(cd.pick());
+				} else if(i%7==5) {
+					comm4.addCard(cd.pick());
+				} else if(i%7==6) {
+					comm5.addCard(cd.pick());
+				} else {
+					comm6.addCard(cd.pick());
+				}
+			}
+			break;
+		}
 	}
 	
 	public void rank(int rank) {
@@ -110,5 +199,40 @@ public class President {  // 대부호 게임
 	public void setRank(int rank) {
 		this.rank = rank;
 	}
+
+	public PlayerBanker getPlayer() {
+		return player;
+	}
+
+	public PlayerBanker getComm() {
+		return comm;
+	}
+
+	public PlayerBanker getComm2() {
+		return comm2;
+	}
+
+	public PlayerBanker getComm3() {
+		return comm3;
+	}
+
+	public PlayerBanker getComm4() {
+		return comm4;
+	}
+
+	public PlayerBanker getComm5() {
+		return comm5;
+	}
+
+	public PlayerBanker getComm6() {
+		return comm6;
+	}
+
+	@Override
+	public String toString() {
+		return "cd=" + cd;
+	}
+	
+	
 	
 }

@@ -13,18 +13,14 @@ public class PlayerBanker {
 		return cl;
 	}
 
-
 	public void setCl(ArrayList<Card> cl) {
 		this.cl = cl;
 	}
 
-
 	public PlayerBanker() {}
-
 
 	public PlayerBanker(ArrayList<Card> cl, CardDeck cd) {
 		this.cl = cl;
 	}
-	
 	
 }
