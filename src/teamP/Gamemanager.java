@@ -8,21 +8,13 @@ public class Gamemanager {
 
 	public void mainConsole(Scanner scan) {
 		int menu = 0;
-		
-		pres.presidentStart(scan);
-		System.out.println(pres.getPlayer().getCl());
-		System.out.println(pres.getComm().getCl());
-//		System.out.println(pres.getComm2().getCl());
-//		System.out.println(pres.getComm3().getCl());
-//		System.out.println(pres.getComm4().getCl());
-		
 		do {
 			System.out.println("----GAME----");
 			System.out.println("1. 텍사스 홀덤");
 			System.out.println("2. 이런거");
 			System.out.println("3. 저런거");
 			System.out.println("4. 추가");
-			System.out.println("5. 예정");
+			System.out.println("5. 대부호");
 			System.out.println("6. 종료");
 			System.out.print("> 번호입력 : ");
 			menu = scan.nextInt();
@@ -40,10 +32,10 @@ public class Gamemanager {
 			case 4 :
 				
 				break;
-			case 5 :
+			case 5 : pres.presidentStart(scan);
 				
 				break;
-			case 6 :
+			case 6 : 
 				break;
 				default :
 					System.out.println("잘못된 메뉴입니다.");

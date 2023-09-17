@@ -11,8 +11,11 @@ public class President {  // 대부호 게임
 	private PlayerBanker comm5 = new PlayerBanker();
 	private PlayerBanker comm6 = new PlayerBanker();
 	private CardDeck cd = new CardDeck();
+	private CardDeck trash = new CardDeck();
 	private int members;
 	private int count;
+	private int dropOrPass=1;
+	private int orderNumber; // playerBanker에 추가해야함
 	private int rank;
 	
 	public President() {}
@@ -82,13 +85,16 @@ public class President {  // 대부호 게임
 		} while(menu!=1);
 	}
 	
-	public void gameMain(Scanner scan) {
+	public void gameMainfirst(Scanner scan) {
+		System.out.println("다이아3을 가진 선을 확인합니다.");
+		
 	}
 	
 	public void givingHandouts(int members) {
+		int deckcount = cd.getCd().size();
 		switch (members) {
 		case 2: 
-			for(int i=0; i<cd.getCd().size(); i++) {
+			for(int i=0; i<deckcount; i++) {
 				if(i%2 == 1) {
 					player.addCard(cd.pick());
 				} else {
@@ -97,7 +103,7 @@ public class President {  // 대부호 게임
 			}
 			break;
 		case 3: 
-			for(int i=0; i<cd.getCd().size(); i++) {
+			for(int i=0; i<deckcount; i++) {
 				if(i%3==1) {
 					player.addCard(cd.pick());
 				} else if(i%3==2) {
@@ -108,7 +114,7 @@ public class President {  // 대부호 게임
 			}
 			break;
 		case 4: 
-			for(int i=0; i<cd.getCd().size(); i++) {
+			for(int i=0; i<deckcount; i++) {
 				if(i%4==1) {
 					player.addCard(cd.pick());
 				} else if(i%4==2) {
@@ -121,7 +127,7 @@ public class President {  // 대부호 게임
 			}
 			break;
 		case 5: 
-			for(int i=0; i<cd.getCd().size(); i++) {
+			for(int i=0; i<deckcount; i++) {
 				if(i%5==1) {
 					player.addCard(cd.pick());
 				} else if(i%5==2) {
@@ -136,7 +142,7 @@ public class President {  // 대부호 게임
 			}
 			break;
 		case 6: 
-			for(int i=0; i<cd.getCd().size(); i++) {
+			for(int i=0; i<deckcount; i++) {
 				if(i%6==1) {
 					player.addCard(cd.pick());
 				} else if(i%6==2) {
@@ -153,7 +159,7 @@ public class President {  // 대부호 게임
 			}
 			break;
 		case 7: 
-			for(int i=0; i<cd.getCd().size(); i++) {
+			for(int i=0; i<deckcount; i++) {
 				if(i%7==1) {
 					player.addCard(cd.pick());
 				} else if(i%7==2) {
@@ -172,7 +178,303 @@ public class President {  // 대부호 게임
 			}
 			break;
 		}
+		System.out.println("카드 분배 완료~!");
 	}
+	
+	public void firstCheck() {
+		switch (this.members) {
+		case 2: 
+			for(int i=0; i<player.getCl().size(); i++) {
+				if(player.getCl().get(i).getShape() =='◆' && player.getCl().get(i).getNum()==3) {
+					player.setOrderNumber(1);
+					comm.setOrderNumber(2);
+					System.out.println("선은 Player 입니다.");
+				} else {
+					player.setOrderNumber(2);
+					comm.setOrderNumber(1);
+					System.out.println("선은 com1 입니다.");
+				}
+			}
+		case 3: 
+			for(int i=0; i<player.getCl().size(); i++) {
+				if(player.getCl().get(i).getShape() =='◆' && player.getCl().get(i).getNum()==3) {
+					player.setOrderNumber(1);
+					comm.setOrderNumber(2);
+					comm2.setOrderNumber(3);
+					System.out.println("선은 Player 입니다.");
+				} 
+			}
+			for(int i=0; i<comm.getCl().size(); i++) {
+				if (comm.getCl().get(i).getShape() == '◆' && comm.getCl().get(i).getNum() == 3) {
+					player.setOrderNumber(3);
+					comm.setOrderNumber(1);
+					comm2.setOrderNumber(2);
+					System.out.println("선은 com1 입니다.");
+				} else {
+					player.setOrderNumber(2);
+					comm.setOrderNumber(3);
+					comm2.setOrderNumber(1);
+					System.out.println("선은 com2 입니다.");
+				}
+			}
+			break;
+		case 4: 
+			for(int i=0; i<player.getCl().size(); i++) {
+				if(player.getCl().get(i).getShape() =='◆' && player.getCl().get(i).getNum()==3) {
+					player.setOrderNumber(1);
+					comm.setOrderNumber(2);
+					comm2.setOrderNumber(3);
+					comm3.setOrderNumber(4);
+					System.out.println("선은 Player 입니다.");
+				} 
+			}
+			for(int i=0; i<comm.getCl().size(); i++) {
+				if (comm.getCl().get(i).getShape() == '◆' && comm.getCl().get(i).getNum() == 3) {
+					player.setOrderNumber(4);
+					comm.setOrderNumber(1);
+					comm2.setOrderNumber(2);
+					comm3.setOrderNumber(3);
+					System.out.println("선은 com1 입니다.");
+				} 
+			}
+			for(int i=0; i<comm2.getCl().size(); i++) {
+				if (comm2.getCl().get(i).getShape() == '◆' && comm2.getCl().get(i).getNum() == 3) {
+					player.setOrderNumber(3);
+					comm.setOrderNumber(4);
+					comm2.setOrderNumber(1);
+					comm3.setOrderNumber(2);
+					System.out.println("선은 com2 입니다.");
+				} else {
+					player.setOrderNumber(2);
+					comm.setOrderNumber(3);
+					comm2.setOrderNumber(4);
+					comm3.setOrderNumber(1);
+					System.out.println("선은 com3 입니다.");
+				}
+			}
+			break;
+		case 5: 
+			for(int i=0; i<player.getCl().size(); i++) {
+				if(player.getCl().get(i).getShape() =='◆' && player.getCl().get(i).getNum()==3) {
+					player.setOrderNumber(1);
+					comm.setOrderNumber(2);
+					comm2.setOrderNumber(3);
+					comm3.setOrderNumber(4);
+					comm4.setOrderNumber(5);
+					System.out.println("선은 Player 입니다.");
+				} 
+			}
+			for(int i=0; i<comm.getCl().size(); i++) {
+				if (comm.getCl().get(i).getShape() == '◆' && comm.getCl().get(i).getNum() == 3) {
+					player.setOrderNumber(5);
+					comm.setOrderNumber(1);
+					comm2.setOrderNumber(2);
+					comm3.setOrderNumber(3);
+					comm4.setOrderNumber(4);
+					System.out.println("선은 com1 입니다.");
+				} 
+			}
+			for(int i=0; i<comm2.getCl().size(); i++) {
+				if (comm2.getCl().get(i).getShape() == '◆' && comm2.getCl().get(i).getNum() == 3) {
+					player.setOrderNumber(4);
+					comm.setOrderNumber(5);
+					comm2.setOrderNumber(1);
+					comm3.setOrderNumber(2);
+					comm4.setOrderNumber(3);
+					System.out.println("선은 com2 입니다.");
+				} 
+			}
+			for(int i=0; i<comm3.getCl().size(); i++) {
+				if (comm3.getCl().get(i).getShape() == '◆' && comm3.getCl().get(i).getNum() == 3) {
+					player.setOrderNumber(3);
+					comm.setOrderNumber(4);
+					comm2.setOrderNumber(5);
+					comm3.setOrderNumber(1);
+					comm4.setOrderNumber(2);
+					System.out.println("선은 com3 입니다.");
+				} else {
+					player.setOrderNumber(2);
+					comm.setOrderNumber(3);
+					comm2.setOrderNumber(4);
+					comm3.setOrderNumber(5);
+					comm4.setOrderNumber(1);
+					System.out.println("선은 com4 입니다.");
+				}
+			}
+			break;
+		case 6: 
+			for(int i=0; i<player.getCl().size(); i++) {
+				if(player.getCl().get(i).getShape() =='◆' && player.getCl().get(i).getNum()==3) {
+					player.setOrderNumber(1);
+					comm.setOrderNumber(2);
+					comm2.setOrderNumber(3);
+					comm3.setOrderNumber(4);
+					comm4.setOrderNumber(5);
+					comm5.setOrderNumber(6);
+					System.out.println("선은 player 입니다.");
+				} 
+			}
+			for(int i=0; i<comm.getCl().size(); i++) {
+				if (comm.getCl().get(i).getShape() == '◆' && comm.getCl().get(i).getNum() == 3) {
+					player.setOrderNumber(6);
+					comm.setOrderNumber(1);
+					comm2.setOrderNumber(2);
+					comm3.setOrderNumber(3);
+					comm4.setOrderNumber(4);
+					comm5.setOrderNumber(5);
+					System.out.println("선은 com1입니다.");
+				} 
+			}
+			for(int i=0; i<comm2.getCl().size(); i++) {
+				if (comm2.getCl().get(i).getShape() == '◆' && comm2.getCl().get(i).getNum() == 3) {
+					player.setOrderNumber(5);
+					comm.setOrderNumber(6);
+					comm2.setOrderNumber(1);
+					comm3.setOrderNumber(2);
+					comm4.setOrderNumber(3);
+					comm5.setOrderNumber(4);
+					System.out.println("선은 com2입니다.");
+				} 
+			}
+			for(int i=0; i<comm3.getCl().size(); i++) {
+				if (comm3.getCl().get(i).getShape() == '◆' && comm3.getCl().get(i).getNum() == 3) {
+					player.setOrderNumber(4);
+					comm.setOrderNumber(5);
+					comm2.setOrderNumber(6);
+					comm3.setOrderNumber(1);
+					comm4.setOrderNumber(2);
+					comm5.setOrderNumber(3);
+					System.out.println("선은 com3입니다.");
+				} 
+			}
+			for(int i=0; i<comm4.getCl().size(); i++) {
+				if (comm4.getCl().get(i).getShape() == '◆' && comm4.getCl().get(i).getNum() == 3) {
+					player.setOrderNumber(3);
+					comm.setOrderNumber(4);
+					comm2.setOrderNumber(5);
+					comm3.setOrderNumber(6);
+					comm4.setOrderNumber(1);
+					comm5.setOrderNumber(2);
+					System.out.println("선은 com4입니다.");
+				} else {
+					player.setOrderNumber(2);
+					comm.setOrderNumber(3);
+					comm2.setOrderNumber(4);
+					comm3.setOrderNumber(5);
+					comm4.setOrderNumber(6);
+					comm5.setOrderNumber(1);
+					System.out.println("선은 com5입니다.");
+				}
+			}
+			break;
+		case 7: 
+			for(int i=0; i<player.getCl().size(); i++) {
+				if(player.getCl().get(i).getShape() =='◆' && player.getCl().get(i).getNum()==3) {
+					player.setOrderNumber(1);
+					comm.setOrderNumber(2);
+					comm2.setOrderNumber(3);
+					comm3.setOrderNumber(4);
+					comm4.setOrderNumber(5);
+					comm5.setOrderNumber(6);
+					comm6.setOrderNumber(7);
+					System.out.println("선은 player 입니다.");
+				} 
+			}
+			for(int i=0; i<comm.getCl().size(); i++) {
+				if (comm.getCl().get(i).getShape() == '◆' && comm.getCl().get(i).getNum() == 3) {
+					player.setOrderNumber(7);
+					comm.setOrderNumber(1);
+					comm2.setOrderNumber(2);
+					comm3.setOrderNumber(3);
+					comm4.setOrderNumber(4);
+					comm5.setOrderNumber(5);
+					comm6.setOrderNumber(6);
+					System.out.println("선은 com1입니다.");
+				} 
+			}
+			for(int i=0; i<comm2.getCl().size(); i++) {
+				if (comm2.getCl().get(i).getShape() == '◆' && comm2.getCl().get(i).getNum() == 3) {
+					player.setOrderNumber(6);
+					comm.setOrderNumber(7);
+					comm2.setOrderNumber(1);
+					comm3.setOrderNumber(2);
+					comm4.setOrderNumber(3);
+					comm5.setOrderNumber(4);
+					comm6.setOrderNumber(5);
+					System.out.println("선은 com2입니다.");
+				} 
+			}
+			for(int i=0; i<comm3.getCl().size(); i++) {
+				if (comm3.getCl().get(i).getShape() == '◆' && comm3.getCl().get(i).getNum() == 3) {
+					player.setOrderNumber(5);
+					comm.setOrderNumber(6);
+					comm2.setOrderNumber(7);
+					comm3.setOrderNumber(1);
+					comm4.setOrderNumber(2);
+					comm5.setOrderNumber(3);
+					comm6.setOrderNumber(4);
+					System.out.println("선은 com3입니다.");
+				} 
+			}
+			for(int i=0; i<comm4.getCl().size(); i++) {
+				if (comm4.getCl().get(i).getShape() == '◆' && comm4.getCl().get(i).getNum() == 3) {
+					player.setOrderNumber(4);
+					comm.setOrderNumber(5);
+					comm2.setOrderNumber(6);
+					comm3.setOrderNumber(7);
+					comm4.setOrderNumber(1);
+					comm5.setOrderNumber(2);
+					comm6.setOrderNumber(3);
+					System.out.println("선은 com4입니다.");
+				} 
+			}
+			for(int i=0; i<comm5.getCl().size(); i++) {
+				if (comm5.getCl().get(i).getShape() == '◆' && comm5.getCl().get(i).getNum() == 3) {
+					player.setOrderNumber(3);
+					comm.setOrderNumber(4);
+					comm2.setOrderNumber(5);
+					comm3.setOrderNumber(6);
+					comm4.setOrderNumber(7);
+					comm5.setOrderNumber(1);
+					comm6.setOrderNumber(2);
+					System.out.println("선은 com5입니다.");
+				} else {
+					player.setOrderNumber(2);
+					comm.setOrderNumber(3);
+					comm2.setOrderNumber(4);
+					comm3.setOrderNumber(5);
+					comm4.setOrderNumber(6);
+					comm5.setOrderNumber(7);
+					comm6.setOrderNumber(1);
+					System.out.println("선은 com6입니다.");
+				}
+			}
+			break;
+		}
+	}
+	
+	public void orderList(PlayerBanker name) {
+			if(name.getOrderNumber()==dropOrPass) {
+				// 유저가 선택하는 메서드
+				// 선택 or pass
+				// 이전에 낸 카드랑 비교하는 메서드가 추가되야함
+				// 
+				dropOrPass++;
+			}
+	}
+	
+	public void pedigreeChart() { // 족보
+		
+		// (강함) 2-A-K-Q-J-10-9-8-7-6-5-4-3 (약함)
+	}
+	
+//	public void revolrution() { // 같은 숫자가 4장일때 혁명
+//		if() {
+//			
+	// (강함) 2-A-K-Q-J-10-9-8-7-6-5-4-3 (약함)  
+	//  ->  (강함) 3-4-5-6-7-8-9-10-J-Q-K-A-2 (약함)
+//		}
+//	}
 	
 	public void rank(int rank) {
 		String ranked = null;
@@ -182,18 +484,12 @@ public class President {  // 대부호 게임
 			break;
 		
 		
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + rank);
+		default: break;
 		}
-		
 	}
 	
 	public int getCount() {
 		return count;
-	}
-
-	public int getRank() {
-		return rank;
 	}
 
 	public void setRank(int rank) {
@@ -232,7 +528,5 @@ public class President {  // 대부호 게임
 	public String toString() {
 		return "cd=" + cd;
 	}
-	
-	
 	
 }

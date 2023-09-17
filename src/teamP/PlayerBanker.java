@@ -23,4 +23,14 @@ public class PlayerBanker {
 		this.cl = cl;
 	}
 	
+	// 순번 정리 추가 필요
+	private int orderNumber;
+	public int getOrderNumber() {
+		return orderNumber;
+	}
+	public void setOrderNumber(int orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+	
+	
 }
