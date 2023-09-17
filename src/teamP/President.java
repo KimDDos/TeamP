@@ -1,8 +1,11 @@
 package teamP;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
-public class President {  // 대부호 게임
+public class President {  private static final Scanner Scanner = null;
+// 대부호 게임
 	private PlayerBanker player = new PlayerBanker();
 	private PlayerBanker comm = new PlayerBanker();
 	private PlayerBanker comm2 = new PlayerBanker();
@@ -19,12 +22,16 @@ public class President {  // 대부호 게임
 	private int orderNumber; // playerBanker에 추가해야함
 	private int rank;
 	
-	public President() {}
+	public President() {
+		trash.getCd().clear();
+	}
 	
 	public void presidentStart(Scanner scan) {
 		gameSetting(scan);
 		presidentRulePrint(scan);
 		givingHandouts(this.members);
+		firstCheck();
+		System.out.println("대부호 게임을 시작합니다~!");
 		showMyDeck();
 	}
 	
@@ -470,24 +477,86 @@ public class President {  // 대부호 게임
 		cp.cardPrint(cp.printDeck());
 	}
 	
-	public void orderList(PlayerBanker name) {
+	public void orderList(PlayerBanker name, Scanner sc) {
 			if(name.getOrderNumber()==dropOrPass) {
-				// 유저가 선택하는 메서드
-				// 선택 or pass
-				// 이전에 낸 카드랑 비교하는 메서드가 추가되야함
-				// 
+				cardchoice(sc);
 				dropOrPass++;
+			}
+			if(this.members+1==dropOrPass) {
+				this.dropOrPass=1;
 			}
 	}
 	
-	public void pedigreeChart(int num) { // 족보
-		if(num >= 3) {
+	public void cardchoice(Scanner sc) {
+		int menu = -1;
+		do {
+			System.out.println("카드를 내려면 1, Pass 하려면 0");
+			menu = sc.nextInt();
+			if(menu!=0) {
+				System.out.println("내고싶은 카드번호를 입력해주세요.");
+				menu = sc.nextInt();
+				while(true) {
+					if(pedigreeChart(player.getCl().get(menu-1).getNum())) {
+						trash.getCd().add(player.getCl().get(menu-1));
+						break;
+					} else {
+						System.out.println("더 강한 카드를 내주세요!");
+						System.out.println("(강함) 2-A-K-Q-J-10-9-8-7-6-5-4-3 (약함)");
+						menu = sc.nextInt();
+					}
+				}
+			}
+			System.out.println("카드를 더 내려면 1, 턴을 종료하려면 0을 입력해주세요.");
+			menu = sc.nextInt();
+		} while(menu!=0);
+		System.out.println("턴 종료~!");
+		
+		
+		
+		try {
+//			System.out.println("낼 카드를 골라주세요.");
+//			menu = sc.nextInt();
 			
+			if(pedigreeChart(menu)) {
+				
+			}
+			
+			trash.getCd().add(player.getCl().get(menu));
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("숫자만 입력해주세요.");
 		}
-		// (강함) 2-A-K-Q-J-10-9-8-7-6-5-4-3 (약함)
 	}
 	
-//	public void revolrution() { // 같은 숫자가 4장일때 혁명
+	public boolean pedigreeChart(int num) { // 족보
+		// (강함) 2-A-K-Q-J-10-9-8-7-6-5-4-3 (약함)
+		if(num ==2 && (trash.getCd().get(0).getNum()==1 || trash.getCd().get(0).getNum()>2)) {
+			trash.getCd().remove(0);
+			return true;
+		}
+		if (trash.getCd().get(0).getNum() == 1 && (2<num||num<14)) {
+			return false;
+		}
+		if(num ==1) {
+			if(trash.getCd().get(0).getNum() == 2) {
+				return false;
+			} else if(trash.getCd().get(0).getNum() == 1) {
+				return false;
+			} else {
+				trash.getCd().remove(0);
+				return true;
+			}
+		}
+		if(num > trash.getCd().get(0).getNum()) {
+			trash.getCd().remove(0);
+			return true;
+		}
+		return false;
+	}
+	
+//	public boolean revolrution() { // 같은 숫자가 4장일때 혁명
 //		if() {
 //			
 	// (강함) 2-A-K-Q-J-10-9-8-7-6-5-4-3 (약함)  
@@ -506,6 +575,8 @@ public class President {  // 대부호 게임
 		default: break;
 		}
 	}
+	
+	
 	
 	public int getCount() {
 		return count;
