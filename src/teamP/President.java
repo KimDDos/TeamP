@@ -1,10 +1,9 @@
 package teamP;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 
-public class President {  private static final Scanner Scanner = null;
+public class President {
 // 대부호 게임
 	private PlayerBanker player = new PlayerBanker();
 	private PlayerBanker comm = new PlayerBanker();
@@ -16,6 +15,7 @@ public class President {  private static final Scanner Scanner = null;
 	private CardDeck cd = new CardDeck();
 	private CardDeck trash = new CardDeck();
 	CardPrint cp = new CardPrint();
+	CardPrint cp2 = new CardPrint();
 	private int members;
 	private int count;
 	private int dropOrPass=1;
@@ -32,7 +32,8 @@ public class President {  private static final Scanner Scanner = null;
 		givingHandouts(this.members);
 		firstCheck();
 		System.out.println("대부호 게임을 시작합니다~!");
-		showMyDeck();
+		firstGame(scan);
+		
 	}
 	
 	public void gameSetting(Scanner scan) {
@@ -94,9 +95,42 @@ public class President {  private static final Scanner Scanner = null;
 		} while(menu!=1);
 	}
 	
-	public void gameMainfirst(Scanner scan) {
-		System.out.println("다이아3을 가진 선을 확인합니다.");
-		
+	public void firstGame(Scanner sc) {
+		do{
+			orderSettings();
+			if(orderList(player)) {
+				int menu = -1;
+				// 앞에 컴퓨터가 낸 카드를 볼 수 있는 메서드 추가 필요
+				do {
+					showMyDeck();
+					System.out.println("카드를 내려면 1, Pass 하려면 0");
+					menu = sc.nextInt();
+					if(menu==0) System.out.println("Pass~!!");
+					if(menu!=0) {
+						System.out.println("내고싶은 카드번호를 입력해주세요.");
+						menu = sc.nextInt();
+						while(true) {
+							if(pedigreeChart(player.getCl().get(menu-1).getNum())) {
+								trash.getCd().add(player.getCl().get(menu-1));
+							} else {
+								System.out.println("더 강한 카드를 내주세요!");
+								System.out.println("(강함) 2-A-K-Q-J-10-9-8-7-6-5-4-3 (약함)");
+								menu = sc.nextInt();
+							}
+							System.out.println("카드를 더 내려면 1, 턴을 종료하려면 0을 입력해주세요.");
+							menu = sc.nextInt();
+							if(menu==0) break;
+						}
+					}
+				} while(menu!=0);
+				System.out.println("Player 턴 종료~!");
+				dropOrPass++;
+				if(this.members+1==dropOrPass) {
+					dropOrPass=1;
+				}
+			}
+			comOrders();
+		} while(true);
 	}
 	
 	public void givingHandouts(int members) {
@@ -188,6 +222,7 @@ public class President {  private static final Scanner Scanner = null;
 			break;
 		}
 		System.out.println("카드 분배 완료~!");
+		System.out.println("--------------------------------------------------------------------------");
 	}
 	
 	public void firstCheck() {
@@ -197,12 +232,11 @@ public class President {  private static final Scanner Scanner = null;
 				if(player.getCl().get(i).getShape() =='◆' && player.getCl().get(i).getNum()==3) {
 					player.setOrderNumber(1);
 					comm.setOrderNumber(2);
-					System.out.println("선은 Player 입니다.");
+					break;
 				} else {
 					player.setOrderNumber(2);
 					comm.setOrderNumber(1);
-					System.out.println("선은 com1 입니다.");
-				}
+				} 
 			}
 		case 3: 
 			for(int i=0; i<player.getCl().size(); i++) {
@@ -210,7 +244,6 @@ public class President {  private static final Scanner Scanner = null;
 					player.setOrderNumber(1);
 					comm.setOrderNumber(2);
 					comm2.setOrderNumber(3);
-					System.out.println("선은 Player 입니다.");
 				} 
 			}
 			for(int i=0; i<comm.getCl().size(); i++) {
@@ -218,12 +251,10 @@ public class President {  private static final Scanner Scanner = null;
 					player.setOrderNumber(3);
 					comm.setOrderNumber(1);
 					comm2.setOrderNumber(2);
-					System.out.println("선은 com1 입니다.");
 				} else {
 					player.setOrderNumber(2);
 					comm.setOrderNumber(3);
 					comm2.setOrderNumber(1);
-					System.out.println("선은 com2 입니다.");
 				}
 			}
 			break;
@@ -234,7 +265,6 @@ public class President {  private static final Scanner Scanner = null;
 					comm.setOrderNumber(2);
 					comm2.setOrderNumber(3);
 					comm3.setOrderNumber(4);
-					System.out.println("선은 Player 입니다.");
 				} 
 			}
 			for(int i=0; i<comm.getCl().size(); i++) {
@@ -243,7 +273,6 @@ public class President {  private static final Scanner Scanner = null;
 					comm.setOrderNumber(1);
 					comm2.setOrderNumber(2);
 					comm3.setOrderNumber(3);
-					System.out.println("선은 com1 입니다.");
 				} 
 			}
 			for(int i=0; i<comm2.getCl().size(); i++) {
@@ -252,13 +281,11 @@ public class President {  private static final Scanner Scanner = null;
 					comm.setOrderNumber(4);
 					comm2.setOrderNumber(1);
 					comm3.setOrderNumber(2);
-					System.out.println("선은 com2 입니다.");
 				} else {
 					player.setOrderNumber(2);
 					comm.setOrderNumber(3);
 					comm2.setOrderNumber(4);
 					comm3.setOrderNumber(1);
-					System.out.println("선은 com3 입니다.");
 				}
 			}
 			break;
@@ -270,7 +297,6 @@ public class President {  private static final Scanner Scanner = null;
 					comm2.setOrderNumber(3);
 					comm3.setOrderNumber(4);
 					comm4.setOrderNumber(5);
-					System.out.println("선은 Player 입니다.");
 				} 
 			}
 			for(int i=0; i<comm.getCl().size(); i++) {
@@ -280,7 +306,6 @@ public class President {  private static final Scanner Scanner = null;
 					comm2.setOrderNumber(2);
 					comm3.setOrderNumber(3);
 					comm4.setOrderNumber(4);
-					System.out.println("선은 com1 입니다.");
 				} 
 			}
 			for(int i=0; i<comm2.getCl().size(); i++) {
@@ -290,7 +315,6 @@ public class President {  private static final Scanner Scanner = null;
 					comm2.setOrderNumber(1);
 					comm3.setOrderNumber(2);
 					comm4.setOrderNumber(3);
-					System.out.println("선은 com2 입니다.");
 				} 
 			}
 			for(int i=0; i<comm3.getCl().size(); i++) {
@@ -300,14 +324,12 @@ public class President {  private static final Scanner Scanner = null;
 					comm2.setOrderNumber(5);
 					comm3.setOrderNumber(1);
 					comm4.setOrderNumber(2);
-					System.out.println("선은 com3 입니다.");
 				} else {
 					player.setOrderNumber(2);
 					comm.setOrderNumber(3);
 					comm2.setOrderNumber(4);
 					comm3.setOrderNumber(5);
 					comm4.setOrderNumber(1);
-					System.out.println("선은 com4 입니다.");
 				}
 			}
 			break;
@@ -320,7 +342,6 @@ public class President {  private static final Scanner Scanner = null;
 					comm3.setOrderNumber(4);
 					comm4.setOrderNumber(5);
 					comm5.setOrderNumber(6);
-					System.out.println("선은 player 입니다.");
 				} 
 			}
 			for(int i=0; i<comm.getCl().size(); i++) {
@@ -331,7 +352,6 @@ public class President {  private static final Scanner Scanner = null;
 					comm3.setOrderNumber(3);
 					comm4.setOrderNumber(4);
 					comm5.setOrderNumber(5);
-					System.out.println("선은 com1입니다.");
 				} 
 			}
 			for(int i=0; i<comm2.getCl().size(); i++) {
@@ -342,7 +362,6 @@ public class President {  private static final Scanner Scanner = null;
 					comm3.setOrderNumber(2);
 					comm4.setOrderNumber(3);
 					comm5.setOrderNumber(4);
-					System.out.println("선은 com2입니다.");
 				} 
 			}
 			for(int i=0; i<comm3.getCl().size(); i++) {
@@ -353,7 +372,6 @@ public class President {  private static final Scanner Scanner = null;
 					comm3.setOrderNumber(1);
 					comm4.setOrderNumber(2);
 					comm5.setOrderNumber(3);
-					System.out.println("선은 com3입니다.");
 				} 
 			}
 			for(int i=0; i<comm4.getCl().size(); i++) {
@@ -364,7 +382,6 @@ public class President {  private static final Scanner Scanner = null;
 					comm3.setOrderNumber(6);
 					comm4.setOrderNumber(1);
 					comm5.setOrderNumber(2);
-					System.out.println("선은 com4입니다.");
 				} else {
 					player.setOrderNumber(2);
 					comm.setOrderNumber(3);
@@ -372,7 +389,6 @@ public class President {  private static final Scanner Scanner = null;
 					comm3.setOrderNumber(5);
 					comm4.setOrderNumber(6);
 					comm5.setOrderNumber(1);
-					System.out.println("선은 com5입니다.");
 				}
 			}
 			break;
@@ -386,7 +402,6 @@ public class President {  private static final Scanner Scanner = null;
 					comm4.setOrderNumber(5);
 					comm5.setOrderNumber(6);
 					comm6.setOrderNumber(7);
-					System.out.println("선은 player 입니다.");
 				} 
 			}
 			for(int i=0; i<comm.getCl().size(); i++) {
@@ -398,7 +413,6 @@ public class President {  private static final Scanner Scanner = null;
 					comm4.setOrderNumber(4);
 					comm5.setOrderNumber(5);
 					comm6.setOrderNumber(6);
-					System.out.println("선은 com1입니다.");
 				} 
 			}
 			for(int i=0; i<comm2.getCl().size(); i++) {
@@ -410,7 +424,6 @@ public class President {  private static final Scanner Scanner = null;
 					comm4.setOrderNumber(3);
 					comm5.setOrderNumber(4);
 					comm6.setOrderNumber(5);
-					System.out.println("선은 com2입니다.");
 				} 
 			}
 			for(int i=0; i<comm3.getCl().size(); i++) {
@@ -422,7 +435,6 @@ public class President {  private static final Scanner Scanner = null;
 					comm4.setOrderNumber(2);
 					comm5.setOrderNumber(3);
 					comm6.setOrderNumber(4);
-					System.out.println("선은 com3입니다.");
 				} 
 			}
 			for(int i=0; i<comm4.getCl().size(); i++) {
@@ -434,7 +446,6 @@ public class President {  private static final Scanner Scanner = null;
 					comm4.setOrderNumber(1);
 					comm5.setOrderNumber(2);
 					comm6.setOrderNumber(3);
-					System.out.println("선은 com4입니다.");
 				} 
 			}
 			for(int i=0; i<comm5.getCl().size(); i++) {
@@ -446,7 +457,6 @@ public class President {  private static final Scanner Scanner = null;
 					comm4.setOrderNumber(7);
 					comm5.setOrderNumber(1);
 					comm6.setOrderNumber(2);
-					System.out.println("선은 com5입니다.");
 				} else {
 					player.setOrderNumber(2);
 					comm.setOrderNumber(3);
@@ -455,14 +465,28 @@ public class President {  private static final Scanner Scanner = null;
 					comm4.setOrderNumber(6);
 					comm5.setOrderNumber(7);
 					comm6.setOrderNumber(1);
-					System.out.println("선은 com6입니다.");
 				}
 			}
 			break;
 		}
+		if(player.getOrderNumber()==1) { System.out.println("우선 플레이 대상은 player입니다."); orderSetting(player);}
+		if(comm.getOrderNumber()==1) System.out.println("우선 플레이 대상은 com입니다."); orderSetting(comm);
+		if(comm2.getOrderNumber()==1) System.out.println("우선 플레이 대상은 com2입니다."); orderSetting(comm2);
+		if(comm3.getOrderNumber()==1) System.out.println("우선 플레이 대상은 com3입니다."); orderSetting(comm3);
+		if(comm4.getOrderNumber()==1) System.out.println("우선 플레이 대상은 com4입니다."); orderSetting(comm4);
+		if(comm5.getOrderNumber()==1) System.out.println("우선 플레이 대상은 com5입니다."); orderSetting(comm5);
+		if(comm6.getOrderNumber()==1) System.out.println("우선 플레이 대상은 com6입니다."); orderSetting(comm6);
+		System.out.println("--------------------------------------------------------------------------");
 	}
 	
+//	if(trash.getCd().get(0) != null) {
+//		System.out.println("[마지막으로 제출한 카드]");
+//		cp2.deckAdd(trash.getCd().get(0).getShape(), trash.getCd().get(0).getNum());
+//		cp2.cardPrint(cp2.printDeck());
+//	}
+	
 	public void showMyDeck() {
+		Collections.sort(player.getCl());
 		for(int i=0; i<player.getCl().size(); i++) {
 			cp.deckAdd(player.getCl().get(i).getShape(), player.getCl().get(i).getNum());
 		}
@@ -477,14 +501,11 @@ public class President {  private static final Scanner Scanner = null;
 		cp.cardPrint(cp.printDeck());
 	}
 	
-	public void orderList(PlayerBanker name, Scanner sc) {
+	public boolean orderList(PlayerBanker name) {
 			if(name.getOrderNumber()==dropOrPass) {
-				cardchoice(sc);
-				dropOrPass++;
+				return true;
 			}
-			if(this.members+1==dropOrPass) {
-				this.dropOrPass=1;
-			}
+			return false;
 	}
 	
 	public void comOrderList(PlayerBanker com) {
@@ -497,32 +518,25 @@ public class President {  private static final Scanner Scanner = null;
 		}
 	}
 	
-	public void orders() {
+	public void comOrders() {
 		switch (this.members){
-		case 2: 
-			orderList(player, Scanner);
-			comOrderList(comm);
-			break;
+		case 2: comOrderList(comm);	break;
 		case 3: 
-			orderList(player, Scanner);
 			comOrderList(comm);
 			comOrderList(comm2);
 			break;
 		case 4: 
-			orderList(player, Scanner);
 			comOrderList(comm);
 			comOrderList(comm2);
 			comOrderList(comm3);
 			break;
 		case 5: 
-			orderList(player, Scanner);
 			comOrderList(comm);
 			comOrderList(comm2);
 			comOrderList(comm3);
 			comOrderList(comm4);
 			break;
 		case 6: 
-			orderList(player, Scanner);
 			comOrderList(comm);
 			comOrderList(comm2);
 			comOrderList(comm3);
@@ -530,7 +544,6 @@ public class President {  private static final Scanner Scanner = null;
 			comOrderList(comm5);
 			break;
 		case 7: 
-			orderList(player, Scanner);
 			comOrderList(comm);
 			comOrderList(comm2);
 			comOrderList(comm3);
@@ -541,31 +554,60 @@ public class President {  private static final Scanner Scanner = null;
 		}
 	}
 	
-	public void cardchoice(Scanner sc) {
-		int menu = -1;
-		// 앞에 컴퓨터가 낸 카드를 볼 수 있는 메서드 추가 필요
-		do {
-			System.out.println("카드를 내려면 1, Pass 하려면 0");
-			menu = sc.nextInt();
-			if(menu==0) System.out.println("Pass~!!");
-			if(menu!=0) {
-				System.out.println("내고싶은 카드번호를 입력해주세요.");
-				menu = sc.nextInt();
-				while(true) {
-					if(pedigreeChart(player.getCl().get(menu-1).getNum())) {
-						trash.getCd().add(player.getCl().get(menu-1));
-					} else {
-						System.out.println("더 강한 카드를 내주세요!");
-						System.out.println("(강함) 2-A-K-Q-J-10-9-8-7-6-5-4-3 (약함)");
-						menu = sc.nextInt();
-					}
-					System.out.println("카드를 더 내려면 1, 턴을 종료하려면 0을 입력해주세요.");
-					menu = sc.nextInt();
-					if(menu==0) break;
+	public void orderSetting(PlayerBanker com) {
+		// comm5.getCl().get(i).getShape() == '◆' && comm5.getCl().get(i).getNum() == 3
+		if(com.getOrderNumber()==1) {
+			for(int i=0; i<com.getCl().size(); i++) {
+				if(com.getCl().get(i).getShape() == '◆' && com.getCl().get(i).getNum() == 3) {
+					trash.getCd().add(com.getCl().get(i));
+					com.getCl().remove(i);
 				}
 			}
-		} while(menu!=0);
-		System.out.println("Player 턴 종료~!");
+		}
+	}
+	
+	public void orderSettings() {
+		switch (this.members){
+		case 2: 
+			orderSetting(player);
+			orderSetting(comm);
+			break;
+		case 3: 
+			orderSetting(player);
+			orderSetting(comm);
+			orderSetting(comm2);
+			break;
+		case 4: 
+			orderSetting(player);
+			orderSetting(comm);
+			orderSetting(comm2);
+			orderSetting(comm3);
+			break;
+		case 5: 
+			orderSetting(player);
+			orderSetting(comm);
+			orderSetting(comm2);
+			orderSetting(comm3);
+			orderSetting(comm4);
+			break;
+		case 6: 
+			orderSetting(player);
+			orderSetting(comm);
+			orderSetting(comm2);
+			orderSetting(comm3);
+			orderSetting(comm4);
+			orderSetting(comm5);
+			break;
+		case 7: 
+			orderSetting(player);
+			orderSetting(comm);
+			orderSetting(comm2);
+			orderSetting(comm3);
+			orderSetting(comm4);
+			orderSetting(comm5);
+			orderSetting(comm6);
+			break;
+		}
 	}
 	
 	public void comChoice(PlayerBanker com) {

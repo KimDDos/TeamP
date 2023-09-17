@@ -1,6 +1,6 @@
 package teamP;
 
-public class Card {
+public class Card implements Comparable{
 
 	private char shape;  //모양
 	private int num; //숫자
@@ -73,6 +73,12 @@ public class Card {
 		}else {
 			this.num = num;			
 		}
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		Card cd = (Card)o;
+		return this.num-cd.num;
 	}
 	
 }
