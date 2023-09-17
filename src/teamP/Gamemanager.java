@@ -33,7 +33,6 @@ public class Gamemanager {
 				
 				break;
 			case 5 : pres.presidentStart(scan);
-				
 				break;
 			case 6 : 
 				break;

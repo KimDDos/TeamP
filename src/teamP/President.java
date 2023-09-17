@@ -12,6 +12,7 @@ public class President {  // 대부호 게임
 	private PlayerBanker comm6 = new PlayerBanker();
 	private CardDeck cd = new CardDeck();
 	private CardDeck trash = new CardDeck();
+	CardPrint cp = new CardPrint();
 	private int members;
 	private int count;
 	private int dropOrPass=1;
@@ -24,6 +25,7 @@ public class President {  // 대부호 게임
 		gameSetting(scan);
 		presidentRulePrint(scan);
 		givingHandouts(this.members);
+		showMyDeck();
 	}
 	
 	public void gameSetting(Scanner scan) {
@@ -453,6 +455,14 @@ public class President {  // 대부호 게임
 		}
 	}
 	
+	public void showMyDeck() {
+		for(int i=0; i<player.getCl().size(); i++) {
+			cp.deckAdd(player.getCl().get(i).getShape(), player.getCl().get(i).getNum());
+		}
+		cp.cardPrint(cp.printDeck());
+		
+	}
+	
 	public void orderList(PlayerBanker name) {
 			if(name.getOrderNumber()==dropOrPass) {
 				// 유저가 선택하는 메서드
@@ -464,7 +474,9 @@ public class President {  // 대부호 게임
 	}
 	
 	public void pedigreeChart() { // 족보
-		
+//		if() {
+//			
+//		}
 		// (강함) 2-A-K-Q-J-10-9-8-7-6-5-4-3 (약함)
 	}
 	
