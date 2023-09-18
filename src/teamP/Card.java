@@ -1,5 +1,7 @@
 package teamP;
 
+import java.util.Objects;
+
 public class Card implements Comparable{
 
 	private char shape;  //모양
@@ -48,6 +50,17 @@ public class Card implements Comparable{
 				System.out.print(num+" ");
 		}
 	}
+	
+	public String numPrint() {
+		switch(num) {
+		case 1: return "A";
+		case 11: return "J";
+		case 12: return "Q";
+		case 13: return "K";
+			default:
+				return ""+num;
+		}
+	}
 
 	public char getShape() {
 		return shape;
@@ -76,9 +89,27 @@ public class Card implements Comparable{
 	}
 
 	@Override
+	public int hashCode() {
+		return Objects.hash(num, shape);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Card other = (Card) obj;
+		return num == other.num && shape == other.shape;
+	}
+
+	@Override
 	public int compareTo(Object o) {
-		Card cd = (Card)o;
-		return this.num-cd.num;
+		// TODO Auto-generated method stub
+		Card card = (Card)o;
+		return this.num-card.num;
 	}
 	
 }

@@ -10,6 +10,10 @@ public class CardDeck {
 	public CardDeck() {
 		newC();
 	}
+	
+	public CardDeck(int i) {
+		ipC();
+	}
 
 	public void newC() {
 		char shape='♥';
@@ -25,6 +29,22 @@ public class CardDeck {
 			}
 		}
 		shuffle();
+	}
+	
+	public void ipC() {
+		char shape='♥';
+		for(int i=1; i<=4; i++) {
+			switch(i) {
+			case 1: shape='♥'; break;
+			case 2: shape='♣'; break;
+			case 3: shape='♠'; break;
+			case 4: shape='◆'; break;
+			}
+			for(int j=1; j<=10; j++) {  //숫자
+				cd.add(new Card(shape, j));
+			}
+		}
+		shuffleip();
 	}
 	
 	
@@ -57,6 +77,15 @@ public class CardDeck {
 		}
 	}
 	
+	public void shuffleip() {
+		for(int i=0; i<cd.size();i++) {
+			int index = (int)(Math.random()*40)+0;
+			Card tmp = cd.get(i); 
+			cd.set(i, cd.get(index));
+			cd.set(index, tmp);
+		}
+	}
+	
 	//한장 빼내는 기능 pick
 	//리턴타입 Card (카드1장)
 	public Card pick() {
@@ -69,6 +98,11 @@ public class CardDeck {
 	public void init() {
 		cd.clear();
 		newC();
+	}
+	
+	public void initip() {
+		cd.clear();
+		ipC();
 	}
 
 }

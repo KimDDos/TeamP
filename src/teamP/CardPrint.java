@@ -475,7 +475,6 @@ public class CardPrint {
 			str.append(card9[idx] + " ");
 		}
 		System.out.println(str);
-		i=0;
 	}
 	
 	
@@ -497,6 +496,11 @@ public class CardPrint {
 		}
 		return printDeck;
 	}
+	
+//	public String cardbackPrint() {
+//		// 54번 출력
+//		cardNum = "54";
+//	}
 	
 	public String cardSelect(char shape, int number) {
 		switch (shape) {
@@ -620,29 +624,47 @@ public class CardPrint {
 				cardNum = "52"; 
 			}
 			break;
-		case 'B':  
-			if(number==0) {
-				cardNum = "54"; break;
+			case 'B':  
+				if(number==0) {
+					cardNum = "54"; break;
+				}
+			case 'J':  
+				if(number==0) {
+					cardNum = "53"; break;
+				}
+				default: break;
 			}
-			default: break;
-		}
-		return cardNum;
-	}
-
-	public List<String> getDeckPrint() {
-		return deckPrint;
-	}
-
-	public void setDeckPrint(List<String> deckPrint) {
-		this.deckPrint = deckPrint;
-	}
-
-	public String getCardNum() {
-		return cardNum;
-	}
-
-	public void setCardNum(String cardNum) {
-		this.cardNum = cardNum;
+			return cardNum;
 	}
 	
+	public void oneCardPrint() {
+		card1[54] = "┏━━━━━━━━━━━┓";
+		card2[54] = "┃░░░░░░░░░░░┃";
+		card3[54] = "┃░░░░░░░░░░░┃";
+		card4[54] = "┃░░░░░░░░░░░┃";
+		card5[54] = "┃░░░░░░░░░░░┃";
+		card6[54] = "┃░░░░░░░░░░░┃";
+		card7[54] = "┃░░░░░░░░░░░┃";
+		card8[54] = "┃░░░░░░░░░░░┃";
+		card9[54] = "┗━━━━━━━━━━━┛";
+		
+		str.append(card1[54] + " ");
+		str.append("\n");
+		str.append(card2[54] + " ");
+		str.append("\n");
+		str.append(card3[54] + " ");
+		str.append("\n");
+		str.append(card4[54] + " ");
+		str.append("\n");
+		str.append(card5[54] + " ");
+		str.append("\n");
+		str.append(card6[54] + " ");
+		str.append("\n");
+		str.append(card7[54] + " ");
+		str.append("\n");
+		str.append(card8[54] + " ");
+		str.append("\n");
+		str.append(card9[54] + " ");
+		System.out.println(str);
+	}
 }
