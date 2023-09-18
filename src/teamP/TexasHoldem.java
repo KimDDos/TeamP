@@ -177,11 +177,13 @@ public class TexasHoldem {
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		Collections.sort(total);
 		int pair = 0;
+		int stfc = 0;
 		boolean fullhouse = false;
 		boolean fourcard = false;
 		boolean straight = false;
 		boolean triple = false;
 		boolean flush = false;
+		boolean stf = false;
 		for(int i = 0; i<total.size()-1; i++) {
 			int sameSp = 0;
 			if(total.get(i).getNum()-total.get(i+1).getNum()==0) {
@@ -208,30 +210,45 @@ public class TexasHoldem {
 				}
 				stD.add(total.get(i));
 				stD.add(total.get(i+1));
-			}else {
+			}else if(stD.size()<5&&total.get(i).getNum()-total.get(i+1).getNum()!=-1){
 				stD.clear();
 			}
 			if(stD.size()>=5) {
 				straight=true;
 			}
 			for(int j = 0; j<total.size(); j++) {
-				if(total.get(i).getShape()==total.get(j).getShape()) {
+				if(i!=j&&total.get(i).getShape()==total.get(j).getShape()) {
 					sameSp++;
+					if(flushD.size()>0&&flushD.get(0)==total.get(i)) {
+						flushD.remove(flushD.size()-1);
+					}
 					flushD.add(total.get(i));
-					flushD.add(total.get(i+1));
+					flushD.add(total.get(j));
 				}
 			}
 			if(sameSp>=5) {
 				flush=true;
+			}else {
+				flushD.clear();
+			}
+		}
+		if(flushD.size()>=5) {
+			for(int k = 0; k<flushD.size()-2; k++) {
+				if(flushD.get(k).getNum()-flushD.get(k+1).getNum()==-1) {
+					stfc++;
+				}
+				if(stfc>=5) {
+					stf=true;
+				}
 			}
 		}
 		showMyDeck(total);
-		if(flush&&straight) {
-			if(stD.get(0).getNum()==1&&stD.get(4).getNum()==5) {
+		if(stf) {
+			if(flushD.get(0).getNum()==1&&flushD.get(4).getNum()==5) {
 				System.out.println("백 스트레이트 플러시 !");
 				list.add(9);
-				list.add(stD.get(4).getNum());
-				switch(stD.get(4).getShape()) {
+				list.add(flushD.get(4).getNum());
+				switch(flushD.get(4).getShape()) {
 				case '♠' :
 					list.add(4);
 					break;
@@ -251,8 +268,8 @@ public class TexasHoldem {
 			}else{
 				System.out.println("스트레이트 플러시!");
 				list.add(8);
-				list.add(stD.get(stD.size()-1).getNum());
-				switch(stD.get(4).getShape()) {
+				list.add(flushD.get(flushD.size()-1).getNum());
+				switch(flushD.get(4).getShape()) {
 				case '♠' :
 					list.add(4);
 					break;
@@ -373,19 +390,21 @@ public class TexasHoldem {
 			System.out.println("플레이어 승");
 		}else if(pl.get(0)<bl.get(0)) {
 			System.out.println("뱅커 승");
-		}else if(pl.get(0)<1&&pl.get(0)==pl.get(0)) {
+		}else if(pl.get(0)<0&&pl.get(0)==bl.get(0)) {
 			System.out.println("무승부");
 		}else {
 			if(pl.get(1)>bl.get(1)) {
 				System.out.println("플레이어 승");
 			}else if(pl.get(1)<bl.get(1)) {
 				System.out.println("뱅커 승");
+			}else if(pl.get(0)==0&&pl.get(1)==bl.get(1)){
+				System.out.println("무승부");
 			}else {
 				if(pl.get(2)>bl.get(2)) {
 					System.out.println("플레이어 승");
 				}else if(pl.get(2)<bl.get(2)) {
 					System.out.println("뱅커 승");
-				}else if(pl.get(0)==2&&pl.get(2)==bl.get(2)){
+				}else if((pl.get(0)==2||pl.get(0)==6)&&pl.get(2)==bl.get(2)){
 					System.out.println("무승부");
 				}else {
 					if(pl.get(3)>bl.get(3)) {
@@ -395,9 +414,9 @@ public class TexasHoldem {
 					}else {
 						System.out.println("무승부");
 					}
-				}
-			}
+				}	
+			}	
 		}
-		
 	}
 }
+
