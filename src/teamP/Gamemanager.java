@@ -21,7 +21,7 @@ public class Gamemanager {
 			
 			switch(menu){
 			case 1 :
-//				th();
+				th();
 				break;
 			case 2 :
 				

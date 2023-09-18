@@ -1,5 +1,7 @@
 package teamP;
 
+import java.util.Objects;
+
 public class Card implements Comparable{
 
 	private char shape;  //모양
@@ -46,6 +48,17 @@ public class Card implements Comparable{
 			break;
 			default:
 				System.out.print(num+" ");
+		}
+	}
+	
+	public String numPrint() {
+		switch(num) {
+		case 1: return "A";
+		case 11: return "J";
+		case 12: return "Q";
+		case 13: return "K";
+			default:
+				return ""+num;
 		}
 	}
 
