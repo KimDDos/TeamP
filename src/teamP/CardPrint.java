@@ -497,10 +497,10 @@ public class CardPrint {
 		return printDeck;
 	}
 	
-//	public String cardbackPrint() {
-//		// 54번 출력
-//		cardNum = "54";
-//	}
+	public String cardbackPrint() {
+		// 54번 출력
+		return cardNum = "54";
+	}
 	
 	public String cardSelect(char shape, int number) {
 		switch (shape) {
@@ -624,6 +624,10 @@ public class CardPrint {
 				cardNum = "52"; 
 			}
 			break;
+		case 'B':  
+			if(number==0) {
+				cardNum = "54"; break;
+			}
 			default: break;
 		}
 		return cardNum;
