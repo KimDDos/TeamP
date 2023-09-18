@@ -475,6 +475,7 @@ public class CardPrint {
 			str.append(card9[idx] + " ");
 		}
 		System.out.println(str);
+		i=0;
 	}
 	
 	
@@ -495,11 +496,6 @@ public class CardPrint {
 			}
 		}
 		return printDeck;
-	}
-	
-	public String cardbackPrint() {
-		// 54번 출력
-		return cardNum = "54";
 	}
 	
 	public String cardSelect(char shape, int number) {

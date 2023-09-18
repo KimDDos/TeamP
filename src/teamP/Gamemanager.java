@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Gamemanager {
 	private TexasHoldem th = new TexasHoldem();
+	private SevenFoker sf = new SevenFoker();
 
 	public void mainConsole(Scanner scan) {
 		int menu = 0;
@@ -13,7 +14,7 @@ public class Gamemanager {
 			System.out.println("2. 이런거");
 			System.out.println("3. 저런거");
 			System.out.println("4. 추가");
-			System.out.println("5. 대부호");
+			System.out.println("5. 세븐포커");
 			System.out.println("6. 종료");
 			System.out.print("> 번호입력 : ");
 			menu = scan.nextInt();
@@ -31,7 +32,7 @@ public class Gamemanager {
 			case 4 :
 				
 				break;
-			case 5 : ;
+			case 5 : sf.sevenFokerStart(scan);;
 				break;
 			case 6 : 
 				break;

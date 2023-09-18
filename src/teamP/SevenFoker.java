@@ -1,14 +1,79 @@
 package teamP;
 
+import java.util.Collections;
 import java.util.Scanner;
 
 public class SevenFoker {
 	// 멤버변수
 	PlayerBanker player = new PlayerBanker();
+	PlayerBanker playerOpen = new PlayerBanker();
 	PlayerBanker com = new PlayerBanker();
-	PlayerBanker open = new PlayerBanker();
+	PlayerBanker comOpen = new PlayerBanker();
+	PlayerBanker publicOpen = new PlayerBanker();
 	private CardDeck cd = new CardDeck();
 	Scanner scan = new Scanner(System.in);
+	
+	// 게임이 흘러가게 만드는 메서드
+	public void sevenFokerStart(Scanner sc) {
+		firstCardAdd();
+		dropCard(sc);
+		openCard(sc);
+	}
+	
+	public void firstCardAdd() {
+		int i=0;
+		while(i<4) {
+			player.addCard(cd.pick());
+			com.addCard(cd.pick());
+			i++;
+		}
+	}
+	
+	public void dropCard(Scanner sc) {
+		showMyDeck();
+		try {
+			System.out.println("버리는 카드는 선택해주세요.");
+			int select = sc.nextInt();
+			player.getCl().remove(select-1);
+			System.out.println("삭제완료~!");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("숫자만 입력해주세요.");
+		}
+	}
+	
+	public void openCard(Scanner sc) {
+		showMyDeck();
+		System.out.println("오픈하는 카드는 선택해주세요.");
+		int select = sc.nextInt();
+		playerOpen.addCard(player.getCl().get(select - 1));
+		player.getCl().remove(select-1);
+		System.out.println(select+"번 카드를 오픈합니다.");
+	}
+	
+	public void cardAdd() {
+		playerOpen.addCard(cd.pick());
+		comOpen.addCard(cd.pick());
+	}
+	
+	public void showMyDeck() {
+		CardPrint cp = new CardPrint();
+		Collections.sort(player.getCl());
+		for(int i=0; i<player.getCl().size(); i++) {
+			cp.deckAdd(player.getCl().get(i).getShape(), player.getCl().get(i).getNum());
+		}
+		for(int i=0; i<playerOpen.getCl().size(); i++) {
+			cp.deckAdd(playerOpen.getCl().get(i).getShape(), playerOpen.getCl().get(i).getNum());
+		}
+		for(int i=0; i<player.getCl().size(); i++) {
+				System.out.print("     ["+(i+1)+"]      ");
+		}
+		for(int i=0; i<playerOpen.getCl().size(); i++) {
+			System.out.print("   [Open]    ");
+	}
+		System.out.println();
+		cp.cardPrint(cp.printDeck());
+	}
 	
 	// 게임 방법
 	// 52장을 섞은 후 플레이어는 4장의 카드를 받음
