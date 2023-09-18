@@ -32,5 +32,4 @@ public class PlayerBanker {
 		this.orderNumber = orderNumber;
 	}
 	
-	
 }

@@ -628,4 +628,21 @@ public class CardPrint {
 		}
 		return cardNum;
 	}
+
+	public List<String> getDeckPrint() {
+		return deckPrint;
+	}
+
+	public void setDeckPrint(List<String> deckPrint) {
+		this.deckPrint = deckPrint;
+	}
+
+	public String getCardNum() {
+		return cardNum;
+	}
+
+	public void setCardNum(String cardNum) {
+		this.cardNum = cardNum;
+	}
+	
 }

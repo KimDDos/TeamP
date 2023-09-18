@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Gamemanager {
 	private TexasHoldem th = new TexasHoldem();
-	private President pres = new President();
 
 	public void mainConsole(Scanner scan) {
 		int menu = 0;
@@ -32,7 +31,7 @@ public class Gamemanager {
 			case 4 :
 				
 				break;
-			case 5 : pres.presidentStart(scan);
+			case 5 : ;
 				break;
 			case 6 : 
 				break;
