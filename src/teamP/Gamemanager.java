@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Gamemanager {
 	private TexasHoldem th = new TexasHoldem();
-	private SevenFoker sf = new SevenFoker();
+	private SevenPoker sf = new SevenPoker();
 
 	public void mainConsole(Scanner scan) {
 		int menu = 0;
@@ -32,7 +32,7 @@ public class Gamemanager {
 			case 4 :
 				
 				break;
-			case 5 : sf.sevenFokerStart(scan);;
+			case 5 : sf.sevenPokerStart(scan);;
 				break;
 			case 6 : 
 				break;
