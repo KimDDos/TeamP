@@ -11,14 +11,13 @@ public class TexasHoldem {
 	private CardDeck cd = new CardDeck();
 	Scanner scan = new Scanner(System.in);
 	
-	public void start() {
+	public void start1() {
 		int fold = 1;
 		ArrayList<Integer> bl = new ArrayList<Integer>();
 		ArrayList<Integer> pl = new ArrayList<Integer>();
 		clear();
 		cd.init();
 		cd.shuffle();
-		System.out.println("<<<<<텍사스홀덤 시작>>>>>");
 		fold = preFlop();
 		if(fold==0) {System.out.println("패배"); return;}
 		fold = draw3();
@@ -32,13 +31,31 @@ public class TexasHoldem {
 		System.out.println("<<플레이어>>");
 		pl = combine(player.getCl(),comm.getCl());
 		match2(pl,bl);
-		System.out.print("다시 하려면 아무 키 입력, 게임 종료는 0번 입력 > ");
+		System.out.print("다시 하려면 아무 번호 입력, 게임 종료는 0번 입력 > ");
 		int i = scan.nextInt();
 		if(i==0) {
 			return;
 		}else {
-			start();
+			start1();
 		}
+	}
+	
+	public void start() {
+		System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("                  <<<텍사스 홀덤>>>");
+		System.out.println("    1. 먼저 뱅커와 플레이어는 카드를 2장씩 받습니다.");
+		System.out.println("    2. 커뮤니티의 5장은 뱅커, 플레이어가 공통으로 사용합니다.");
+		System.out.println("    3. 7장 중 5장으로 족보를 비교합니다.");
+		System.out.println("    4. 처움 두 장을 받고 포기할 수 있습니다.");
+		System.out.println("    5. 커뮤니티 카드가 3,4,5번째 오픈될 때 포기할 수 있습니다.");
+		System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.print("게임을 시작하려면 아무 번호 입력, 종료하려면 0번 입력 > ");
+		int exit = scan.nextInt();
+		if(exit==0) {
+			System.out.println("게임 종료");
+			return;
+		}
+		start1();
 	}
 	
 	public int callOrFold(Scanner scan) {
@@ -57,9 +74,10 @@ public class TexasHoldem {
 			Card pc = cd.pick();
 			player.addCard(pc);
 		}
-		System.out.println("뱅커[??, ??]");
+		System.out.println("<<뱅커>>");
+		showMyDeckB();
 		System.out.println("<<플레이어>>");
-		showMyDeckP();
+		showMyDeck(player.getCl());
 		if(callOrFold(scan)==0) {
 			return 0;
 		}else {
@@ -119,28 +137,12 @@ public class TexasHoldem {
 		cp.cardPrint(cp.printDeck());
 	}
 	
-	public void showMyDeckP() {
-		CardPrint cp = new CardPrint();
-		for(int i=0; i<player.getCl().size(); i++) {
-			cp.deckAdd(player.getCl().get(i).getShape(), player.getCl().get(i).getNum());
-		}
-		for(int i=0; i<player.getCl().size(); i++) {
-			if(i>=10) {
-				System.out.print("    ["+(i+1)+"]     ");
-			} else {
-				System.out.print("     ["+(i+1)+"]      ");
-			}
-		}
-		System.out.println();
-		cp.cardPrint(cp.printDeck());
-	}
-	
 	public void showMyDeckB() {
 		CardPrint cp = new CardPrint();
-		for(int i=0; i<banker.getCl().size(); i++) {
-			cp.deckAdd(banker.getCl().get(i).getShape(), banker.getCl().get(i).getNum());
+		for(int i=0; i<2; i++) {
+			cp.deckAdd('B', 0);
 		}
-		for(int i=0; i<banker.getCl().size(); i++) {
+		for(int i=0; i<2; i++) {
 			if(i>=10) {
 				System.out.print("    ["+(i+1)+"]     ");
 			} else {
